@@ -16,6 +16,112 @@ body {
 /* Pixel font for headings */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-btn {
+    padding: 10px 20px;
+    background: #ff85a2;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 133, 162, 0.4);
+}
+
+.theme-btn:hover {
+    background: #ff6b93;
+    transform: scale(1.05);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+}
+
+.dark-mode .header {
+    background: rgba(30, 30, 46, 0.9);
+    border-color: #ff6b93;
+}
+
+.dark-mode .title,
+.dark-mode .subtitle,
+.dark-mode .section-title {
+    color: #ff85a2;
+    text-shadow: 1px 1px 0px #000;
+}
+
+.dark-mode .content-box,
+.dark-mode .project-box,
+.dark-mode .skill-card,
+.dark-mode .fact {
+    background: rgba(30, 30, 46, 0.9);
+    border-color: #4a4a6d;
+    color: #e0e0e0;
+}
+
+.dark-mode .nav-link {
+    background: #4a4a6d;
+    border-color: #ff85a2;
+    color: #e0e0e0;
+}
+
+.dark-mode .nav-link:hover {
+    background: #ff85a2;
+    color: #1a1a2e;
+}
+
+.dark-mode .icon-link {
+    background: rgba(30, 30, 46, 0.9);
+    border-color: #4a4a6d;
+    color: #ff85a2;
+}
+
+.dark-mode .icon-link:hover {
+    color: white;
+    /* Keep the platform-specific colors */
+}
+
+.dark-mode .footer {
+    background: rgba(30, 30, 46, 0.9);
+    border-color: #ce93ff;
+    color: #ce93ff;
+}
+
+.dark-mode li {
+    color: #e0e0e0;
+}
+
+.dark-mode .fact-text span,
+.dark-mode .project-box p {
+    color: #b0b0b0;
+}
+
+/* Update button text in dark mode */
+.dark-mode .theme-btn {
+    background: #4a4a6d;
+}
+
+.dark-mode .theme-btn:hover {
+    background: #ff85a2;
+}
+
+.dark-mode .theme-btn i {
+    content: "☀️";
+}
+
 
 .about-grid {
     display: grid;
