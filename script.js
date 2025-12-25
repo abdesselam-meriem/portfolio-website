@@ -1,47 +1,45 @@
 // Theme toggle functionality
-const themeButton = document.getElementById('themeButton');
-const body = document.body;
-
-// Check for saved theme or prefer-color-scheme
-const savedTheme = localStorage.getItem('theme') || 
-                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-// Apply saved theme
-if (savedTheme === 'dark') {
-    enableDarkMode();
-} else {
-    // Make sure button shows correct state on load
-    themeButton.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-}
-
-// Toggle theme on button click
-themeButton.addEventListener('click', () => {
-    if (body.classList.contains('dark-mode')) {
-        disableDarkMode();
-    } else {
-        enableDarkMode();
+function initTheme() {
+    const themeToggle = document.getElementById('themeButton');
+    const body = document.body;
+    
+    // Check for saved theme preference or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        updateThemeButton(true);
     }
-});
-
-function enableDarkMode() {
-    body.classList.add('dark-mode');
-    themeButton.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-    localStorage.setItem('theme', 'dark');
+    
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Save preference to localStorage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                updateThemeButton(true);
+            } else {
+                localStorage.setItem('theme', 'light');
+                updateThemeButton(false);
+            }
+        });
+    }
 }
 
-function disableDarkMode() {
-    body.classList.remove('dark-mode');
-    themeButton.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-    localStorage.setItem('theme', 'light');
-}
-
-// Listen for system theme changes (optional)
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('theme')) {
-        if (e.matches) {
-            enableDarkMode();
+// Update button icon and text
+function updateThemeButton(isDarkMode) {
+    const themeButton = document.getElementById('themeButton');
+    if (themeButton) {
+        const icon = themeButton.querySelector('i');
+        if (isDarkMode) {
+            icon.className = 'fas fa-sun';
+            themeButton.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
         } else {
-            disableDarkMode();
+            icon.className = 'fas fa-moon';
+            themeButton.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
         }
     }
-});
+}
+
+// Initialize theme when page loads
+document.addEventListener('DOMContentLoaded', initTheme);
